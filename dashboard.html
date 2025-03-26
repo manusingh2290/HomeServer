@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeServer - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1 class="logo">Home Server</h1>
+
+        <!-- Search & Location Bar -->
+        <section class="search-container">
+            <input type="text" id="location" placeholder="Enter your location">
+            <input type="text" id="searchBox" placeholder="Search for services..." onkeyup="filterServices()">
+            <button>Search</button>
+        </section>
+
+        <nav>
+            <!-- Profile Dropdown -->
+            <div class="profile-container">
+                <img src="profile icon.avif" id="profileIcon" class="profile-img" alt="Profile">
+                <div id="profileDropdown" class="dropdown-content">
+                    <a href="#">My Account</a>
+                    <a href="#">Settings</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Service List (Now using Images) -->
+    <section class="services">
+        <ul id="serviceList">
+            <li onclick="selectService('Electrician')">
+                <img src="electrician.jpg" alt="Electrician">
+            </li>
+            <li onclick="selectService('Plumber')">
+                <img src="plumber.jpg" alt="Plumber">
+            </li>
+            <li onclick="selectService('Gardener')">
+                <img src="gardener.jpg" alt="Gardener">
+            </li>
+            <li onclick="selectService('Carpenter')">
+                <img src="your_path/carpenter.jpg" alt="Carpenter">
+            </li>
+            <li onclick="selectService('Mechanic')">
+                <img src="your_path/mechanic.jpg" alt="Mechanic">
+            </li>
+            <li onclick="selectService('IT Technician')">
+                <img src="your_path/it_technician.jpg" alt="IT Technician">
+            </li>
+        </ul>
+    </section>
+
+    <!-- Selected Service Display Area -->
+    <section id="serviceDetails" class="hidden">
+        <h2 id="serviceName"></h2>
+        <p id="servicePhrase"></p>
+        <textarea id="serviceDescription" placeholder="Describe your issue or requirements..."></textarea>
+
+        <!-- Time Toggler -->
+        <label for="serviceTime">Select Service Time:</label>
+        <input type="time" id="serviceTime">
+        <button id="bookService">Book Now</button>
+    </section>
+
+    <!-- Real-time clock -->
+    <div class="clock-container" id="datetime"></div>
+
+    <script src="dashboard.js"></script>
+    <script src="script.js"></script> <!-- JavaScript for real-time clock -->
+</body>
+</html>
