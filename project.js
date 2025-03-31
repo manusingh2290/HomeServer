@@ -17,12 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Function to handle signup and store user data
 function signUp() {
     let mobileNumber = document.getElementById("newMobile").value;
     let password = document.getElementById("newPassword").value;
 
-    // Validate mobile number format
     if (!/^\d{10}$/.test(mobileNumber)) {
         alert("Please enter a valid 10-digit mobile number.");
         return;
@@ -35,7 +33,6 @@ function signUp() {
 
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Check if mobile number already exists
     if (users.some(user => user.mobileNumber === mobileNumber)) {
         alert("Mobile number already registered! Please login.");
         return;
@@ -45,7 +42,6 @@ function signUp() {
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
-    // Save user data to file
     let userDataJSON = JSON.stringify(users, null, 2);
     let blob = new Blob([userDataJSON], { type: "application/json" });
     let url = URL.createObjectURL(blob);
@@ -62,7 +58,6 @@ function signUp() {
     window.location.href = "index.html";
 }
 
-// Function to download user data as JSON file
 function saveUserDataToFile(users) {
     let userDataJSON = JSON.stringify(users, null, 2);
     let blob = new Blob([userDataJSON], { type: "application/json" });
@@ -77,7 +72,6 @@ function saveUserDataToFile(users) {
     URL.revokeObjectURL(url);
 }
 
-// Function to handle login validation
 function login() {
     let mobileNumber = document.getElementById("loginMobile").value;
     let password = document.getElementById("loginPassword").value;
@@ -109,5 +103,5 @@ function updateDateTime() {
     document.getElementById("datetime").innerHTML = now.toLocaleString('en-US', options);
 }
 
-setInterval(updateDateTime, 1000); // Update every second
-updateDateTime(); // Initial call
+setInterval(updateDateTime, 1000);
+updateDateTime();
