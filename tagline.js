@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const taglineElement = document.getElementById("animatedTagline");
 
     function animateTagline() {
-        taglineElement.style.opacity = "0"; // Start fade-out
+        taglineElement.style.opacity = "0";
         setTimeout(() => {
-            taglineElement.textContent = ""; // Clear previous text
+            taglineElement.textContent = "";
             let words = taglines[taglineIndex].split(" ");
             let wordIndex = 0;
 
@@ -19,18 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (wordIndex < words.length) {
                     taglineElement.textContent += words[wordIndex] + " ";
                     wordIndex++;
-                    setTimeout(typeNextWord, 200); // Typing speed
+                    setTimeout(typeNextWord, 200);
                 } else {
                     setTimeout(() => {
-                        taglineElement.style.opacity = "1"; // Fade-in effect
+                        taglineElement.style.opacity = "1";
                         taglineIndex = (taglineIndex + 1) % taglines.length;
-                        setTimeout(animateTagline, 3000); // Wait before next tagline
+                        setTimeout(animateTagline, 3000);
                     }, 300);
                 }
             }
 
             typeNextWord();
-        }, 300); // Pause before typing the next tagline
+        }, 300);
     }
 
     animateTagline();
