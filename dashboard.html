@@ -7,70 +7,188 @@
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <!-- Header Section -->
     <header>
-        <h1 class="logo">Home Server</h1>
-
-        <!-- Search & Location Bar -->
+        <header>
+            <h1 class="logo">
+                <img src="logo.webp" alt="Home Server Logo" class="logo-img"> Home Server
+            </h1>
+        </header>
         <section class="search-container">
             <input type="text" id="location" placeholder="Enter your location">
+<button id="detectLocation">Detect Location</button>
+<button id="checkLocation">Check</button>
+<p id="locationDetails"></p>
+
             <input type="text" id="searchBox" placeholder="Search for services..." onkeyup="filterServices()">
-            <button>Search</button>
         </section>
 
         <nav>
-            <!-- Profile Dropdown -->
             <div class="profile-container">
                 <img src="profile icon.avif" id="profileIcon" class="profile-img" alt="Profile">
                 <div id="profileDropdown" class="dropdown-content">
-                    <a href="#">My Account</a>
-                    <a href="#">Settings</a>
+                    <a href="#" id="myAccountBtn">My Account</a>
+                    <a href="#" id="theme">Theme</a>
                     <a href="#" id="logoutBtn">Logout</a>
                 </div>
             </div>
         </nav>
-    </header>
+<div id="myAccountSection" class="hidden">
+    <h3>My Account</h3>
+    <div id="accountDetails" class="hidden">
+        <p><strong>Name:</strong> <span id="accountName"></span></p>
+        <p><strong>Mobile:</strong> <span id="accountMobile"></span></p>
+        <p><strong>Address:</strong> <span id="accountAddress"></span></p>
+        <p><strong>Gender:</strong> <span id="accountGender"></span></p>
+        <p><strong>Email:</strong> <span id="accountEmail"></span></p>
+        <h4>Bookings:</h4>
+        <ul id="bookingList"></ul>
+    </div>
 
-    <!-- Service List (Now using Images) -->
+    <div id="accountForm">
+        <label>Name: <input type="text" id="inputName"></label>
+        <label>Gender: 
+            <select id="inputGender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </label>
+        <label>Address: <input type="text" id="inputAddress"></label>
+        <label>Email: <input type="email" id="inputEmail"></label>
+        <button id="saveAccountDetails">Save</button>
+    </div>
+</div>
+
+    </header>
     <section class="services">
         <ul id="serviceList">
             <li onclick="selectService('Electrician')">
-                <img src="electrician.jpg" alt="Electrician">
+                <img src="electrician1.jpg" alt="Electrician">
+                <pre style="border: 1px solid black; padding: 5px; color: black; font-weight: bold; background-color: lightgray;">Electrician</pre>
             </li>
             <li onclick="selectService('Plumber')">
                 <img src="plumber.jpg" alt="Plumber">
+                <pre style="border: 1px solid black; padding: 5px; color: black; font-weight: bold; background-color: lightgray;">Plumber</pre>
             </li>
             <li onclick="selectService('Gardener')">
-                <img src="gardener.jpg" alt="Gardener">
+                <img src="gardener1.jpg" alt="Gardener">
+                <pre style="border: 1px solid black; padding: 5px; color: black; font-weight: bold; background-color: lightgray;">Gardener</pre>
             </li>
             <li onclick="selectService('Carpenter')">
-                <img src="carpenter.jpeg" alt="Carpenter">
+                <img src="carpenter1.jpg" alt="Carpenter">
+                <pre style="border: 1px solid black; padding: 5px; color: black; font-weight: bold; background-color: lightgray;">Carpenter</pre>
             </li>
             <li onclick="selectService('Mechanic')">
-                <img src="mechanic.avif" alt="Mechanic">
+                <img src="mechanic1.jpg" alt="Mechanic">
+                <pre style="border: 1px solid black; padding: 5px; color: black; font-weight: bold; background-color: lightgray;">Mechanic</pre>
             </li>
             <li onclick="selectService('IT Technician')">
-                <img src="it technician.jpeg" alt="IT Technician">
+                <img src="it technician1.jpg" alt="IT Technician">
+                <pre style="border: 1px solid black; padding: 5px; color: black; font-weight: bold; background-color: lightgray;">IT Technician</pre>
             </li>
-        </ul>
-    </section>
+<li id="otherServices">
+    <img src="other services.jpg" alt="Other Services">
+    <pre style="border: 1px solid black; padding: 5px; color: black; font-weight: bold; background-color: lightgray;">Other Services</pre>
+</li>
 
-    <!-- Selected Service Display Area -->
+<div id="otherServicesModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Other Services</h2>
+        <ul class="modal-services">
+            <li onclick="selectService('Painter')">Painter</li>
+            <li onclick="selectService('AC Repair')">AC Repair</li>
+            <li onclick="selectService('Tutor')">Tutor</li>
+            <li onclick="selectService('Catering')">Catering</li>
+            <li onclick="selectService('Cook')">Cook</li>
+            <li onclick="selectService('Pest Control')">Pest Control</li>
+            <li onclick="selectService('Home Cleaning')">Home Cleaning</li>
+            <li onclick="selectService('Babysitter')">Babysitter</li>
+        </ul>
+    </div>
+</div>
+
+        </ul>
+</section>
     <section id="serviceDetails" class="hidden">
         <h2 id="serviceName"></h2>
         <p id="servicePhrase"></p>
         <textarea id="serviceDescription" placeholder="Describe your issue or requirements..."></textarea>
 
-        <!-- Time Toggler -->
-        <label for="serviceTime">Select Service Time:</label>
-        <input type="time" id="serviceTime">
+        <label for="serviceDate">Select Date:</label>
+<input type="date" id="serviceDate">
+
+<label for="serviceTime">Select Time:</label>
+<select id="serviceTime">
+</select>
         <button id="bookService">Book Now</button>
     </section>
 
-    <!-- Real-time clock -->
     <div class="clock-container" id="datetime"></div>
 
-    <script src="dashboard.js"></script>
-    <script src="script.js"></script> <!-- JavaScript for real-time clock -->
+<div id="helpButton" class="help-container">?</div>
+
+<div id="helpModal" class="help-modal">
+    <div class="help-content">
+        <span class="close-btn">&times;</span>
+        <h2>How can we help you?</h2>
+        <p>Select an option:</p>
+        <ul>
+            <li><a href="#" id="faqBtn">FAQs</a></li>
+            <li><a href="#" id="contactBtn">Contact Support</a></li>
+            <li><a href="#" id="reportIssueBtn">Report an Issue</a></li>
+        </ul>
+
+        <div id="faqSection" class="faq-container hidden">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <button class="faq-question">What home services do you offer?</button>
+                <div class="faq-answer">We offer services like plumbing, electrical repairs, home cleaning, and more.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How can I book a service?</button>
+                <div class="faq-answer">You can book a service through our website or mobile app by selecting your desired service and choosing a time slot.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Do you provide same-day service?</button>
+                <div class="faq-answer">Yes, same-day services are available based on provider availability.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Are your service providers verified or background-checked?</button>
+                <div class="faq-answer">Yes, all service providers undergo a background check and verification process before joining.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What are your service charges or pricing structure?</button>
+                <div class="faq-answer">Pricing varies based on the service type and location. You can check estimated costs before booking.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Can I get a free estimate or quote before booking?</button>
+                <div class="faq-answer">Yes, you can get a free quote by entering your service details.</div>
+            </div>
+        </div>
+
+        <div id="contactSection" class="contact-container hidden">
+            <h3>Contact Support</h3>
+            <div class="contact-card">
+                <p><strong>Name:</strong> MANENDRA SINGH</p>
+                <p><strong>Mobile:</strong> +91 7378221449</p>
+                <p><strong>Email:</strong> manendra.singh2023@vitstudent.ac.in</p>
+            </div>
+            <div class="contact-card">
+                <p><strong>Name:</strong> RAJWARDHAN DASTURE</p>
+                <p><strong>Mobile:</strong> +91 85306 87711</p>
+                <p><strong>Email:</strong> rajwardhan.dasture2023@vitstudent.ac.in</p>
+            </div>
+        </div>
+
+        <div id="issueReportSection" class="hidden">
+            <textarea id="issueText" placeholder="Describe your issue..." rows="4"></textarea>
+            <button id="submitIssue">Submit</button>
+        </div>
+    </div>
+</div>
+
+<script src="dashboard.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
